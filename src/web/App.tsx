@@ -1,4 +1,4 @@
-import { type CSSProperties, type ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { type ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 import type { ChatSummary, ClientConfig } from '../server/contracts.ts'
 import { AccountControls } from './AccountControls.tsx'
@@ -15,7 +15,7 @@ import { ReferencesPanel, SourcesPanel } from './SourcesPanel.tsx'
 import { Thread } from './Thread.tsx'
 import { useChat } from './useChat.ts'
 import { useFeedback } from './useFeedback.ts'
-import { TAGLINE_WORDS, Welcome } from './Welcome.tsx'
+import { Welcome } from './Welcome.tsx'
 
 export default function App() {
   const local = useMemo(() => new LocalLibrary(), [])
@@ -328,12 +328,12 @@ function Workspace({ library, notify: setNotice, account }: WorkspaceProps) {
                 onNote={ratingClient ? feedback.note : undefined}
               />
             ) : (
-              <Welcome />
+              <Welcome key={conversation.id} />
             )}
           </div>
         </div>
 
-        <footer ref={composerArea} className="composer-area" style={{ '--tagline-words': TAGLINE_WORDS } as CSSProperties}>
+        <footer ref={composerArea} className="composer-area">
           <div className="reading">
             <Composer
               ref={composer}

@@ -227,21 +227,33 @@ ul {
   cursor: pointer;
 }
 
-.brand-mark {
-  width: var(--control-sm);
-  height: var(--control-sm);
-  flex: none;
-}
-
 .brand-name {
   color: var(--color-text);
-  font-family: var(--font-reading);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
+  font-family: var(--font-brand);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-regular);
+  line-height: 1.1;
 }
 
 .brand-name-accent {
   color: var(--color-accent-text);
+  font-style: italic;
+}
+
+/* Written out left to right as the page opens; seen whole when motion is reduced. */
+@media (prefers-reduced-motion: no-preference) {
+  .brand-name {
+    animation: pen-stroke var(--duration-pen) cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+}
+
+@keyframes pen-stroke {
+  from {
+    clip-path: inset(-20% 100% -20% 0);
+  }
+  to {
+    clip-path: inset(-20% 0 -20% 0);
+  }
 }
 
 .topbar-title {
@@ -793,183 +805,38 @@ a.menu-item {
 }
 
 .welcome {
-  position: relative;
-  isolation: isolate;
   padding: var(--space-3xl) 0;
 }
 
-/* Seen whole when motion is reduced; otherwise it fills, is cut and empties on a loop. */
-.filling-drop {
-  display: block;
-  width: var(--layout-filling-drop);
-  height: var(--layout-filling-drop);
-  margin: 0 auto var(--space-xl);
-  color: var(--color-accent);
-}
-
-.filling-drop-liquid {
-  transform: translateY(1.4px);
-}
-
-.filling-drop-ring {
-  stroke-dasharray: 26.7;
-}
-
-.filling-drop-dot {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .filling-drop-liquid {
-    animation: fill-drop var(--duration-fill) var(--ease-out-cubic) infinite;
-  }
-
-  .filling-drop-ring {
-    animation: cut-ring var(--duration-fill) var(--ease-out-cubic) infinite;
-  }
-
-  .filling-drop-dot {
-    animation: cut-dot var(--duration-fill) var(--ease-out-cubic) infinite;
-  }
-}
-
-/* Four steps up, a pause, then empty: 0.6s a step, 0.2s apart, over 5.2s. */
-@keyframes fill-drop {
-  0% {
-    transform: translateY(22.75px);
-  }
-  11.54%,
-  15.38% {
-    transform: translateY(17.41px);
-  }
-  26.92%,
-  30.77% {
-    transform: translateY(12.08px);
-  }
-  42.31%,
-  46.15% {
-    transform: translateY(6.74px);
-  }
-  57.69% {
-    transform: translateY(1.4px);
-  }
-  88.46% {
-    transform: translateY(1.4px);
-    animation-timing-function: ease-in-out;
-  }
-  100% {
-    transform: translateY(22.75px);
-  }
-}
-
-/* The ring is cut in once the drop is full, and closes again as it empties. */
-@keyframes cut-ring {
-  0%,
-  63.46% {
-    stroke-dashoffset: 26.7;
-  }
-  76.92% {
-    stroke-dashoffset: 0;
-  }
-  88.46% {
-    stroke-dashoffset: 0;
-    animation-timing-function: ease-in-out;
-  }
-  100% {
-    stroke-dashoffset: 26.7;
-  }
-}
-
-@keyframes cut-dot {
-  0%,
-  63.46% {
-    transform: scale(0);
-  }
-  76.92% {
-    transform: scale(1);
-  }
-  88.46% {
-    transform: scale(1);
-    animation-timing-function: ease-in-out;
-  }
-  100% {
-    transform: scale(0);
-  }
-}
-
 .tagline {
-  font-family: var(--font-reading);
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-medium);
+  font-family: var(--font-brand);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-regular);
   line-height: var(--leading-tight);
   text-align: center;
   text-wrap: balance;
   color: var(--color-text);
 }
 
-/* The words settle in one after another. */
-.tagline-word {
-  display: inline-block;
-  animation: rise-in var(--duration-reveal) var(--ease-standard) both;
-  animation-delay: calc(var(--word-index) * var(--duration-word-stagger));
+/* Written out as the name is, one line after another: the text is painted by a background that grows from the
+   left, and an inline box lays its lines end to end for it. Seen whole when motion is reduced. */
+.tagline-text {
+  background: linear-gradient(var(--color-text), var(--color-text)) no-repeat;
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* Glows sit centred behind the tagline, fade in once its words have settled, then drift.
-   The box stays narrower than the column so drifting never spills into a scrollbar. */
-.welcome-glows {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: -1;
-  width: min(var(--layout-glow-width), 80%);
-  height: var(--layout-glow-height);
-  translate: -50% -50%;
-  pointer-events: none;
-  animation: fade-in var(--duration-glow-in) var(--ease-standard) both;
-  animation-delay: calc(var(--tagline-words) * var(--duration-word-stagger));
-}
-
-.welcome-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60%;
-  height: 100%;
-  border-radius: var(--radius-pill);
-  background: radial-gradient(closest-side, var(--color-glow), transparent);
-  animation: drift var(--duration-drift) ease-in-out infinite alternate;
-}
-
-.welcome-glow:nth-child(2) {
-  left: 40%;
-  background: radial-gradient(closest-side, var(--color-glow-warm), transparent);
-  animation-duration: calc(var(--duration-drift) * 1.3);
-  animation-direction: alternate-reverse;
-}
-
-.welcome-glow:nth-child(3) {
-  left: 20%;
-  width: 60%;
-  animation-duration: calc(var(--duration-drift) * 0.8);
-  animation-delay: calc(var(--duration-drift) * -0.5);
-}
-
-@keyframes drift {
-  0% {
-    transform: translate(-12%, -10%) scale(0.85);
-  }
-  50% {
-    transform: translate(8%, 12%) scale(1.1);
-  }
-  100% {
-    transform: translate(14%, -6%) scale(0.95);
+@media (prefers-reduced-motion: no-preference) {
+  .tagline-text {
+    animation: pen-ink var(--duration-pen) cubic-bezier(0.65, 0, 0.35, 1) both;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .welcome-glow {
-    animation: none;
+@keyframes pen-ink {
+  from {
+    background-size: 0% 100%;
   }
 }
 
@@ -1068,94 +935,6 @@ a.menu-item {
   gap: var(--space-xs);
   color: var(--color-text-muted);
   font-size: var(--text-sm);
-}
-
-/* The drop struck four times, as a remedy is succussed, then settling. */
-.tap-drop {
-  width: 1.5em;
-  height: 1.5em;
-  flex: none;
-  color: var(--color-accent);
-  transform-origin: 50% 95%;
-  animation: succuss var(--duration-succuss) ease-in-out infinite;
-}
-
-@keyframes succuss {
-  0% {
-    transform: translateY(0%) rotate(0deg) scale(1.08, 0.9);
-  }
-  0.82% {
-    transform: translateY(-3.3%) rotate(-2.2deg) scale(1, 1);
-  }
-  3.44% {
-    transform: translateY(-9%) rotate(-6deg) scale(1, 1);
-  }
-  6.05% {
-    transform: translateY(-3.3%) rotate(-2.2deg) scale(1, 1);
-  }
-  6.87% {
-    transform: translateY(0%) rotate(0deg) scale(1.08, 0.9);
-  }
-  7.70% {
-    transform: translateY(-3.3%) rotate(-2.2deg) scale(1, 1);
-  }
-  10.31% {
-    transform: translateY(-9%) rotate(-6deg) scale(1, 1);
-  }
-  12.92% {
-    transform: translateY(-3.3%) rotate(-2.2deg) scale(1, 1);
-  }
-  13.75% {
-    transform: translateY(0%) rotate(0deg) scale(1.08, 0.9);
-  }
-  14.57% {
-    transform: translateY(-3.3%) rotate(-2.2deg) scale(1, 1);
-  }
-  17.19% {
-    transform: translateY(-9%) rotate(-6deg) scale(1, 1);
-  }
-  19.80% {
-    transform: translateY(-3.3%) rotate(-2.2deg) scale(1, 1);
-  }
-  20.62% {
-    transform: translateY(0%) rotate(0deg) scale(1.08, 0.9);
-  }
-  21.45% {
-    transform: translateY(-3.3%) rotate(-2.2deg) scale(1, 1);
-  }
-  24.06% {
-    transform: translateY(-9%) rotate(-6deg) scale(1, 1);
-  }
-  26.67% {
-    transform: translateY(-3.3%) rotate(-2.2deg) scale(1, 1);
-  }
-  27.50% {
-    transform: translateY(0%) rotate(0deg) scale(1.08, 0.9);
-  }
-  30.56% {
-    transform: translateY(0%) rotate(0deg) scale(1.041, 0.959);
-  }
-  36.72% {
-    transform: translateY(0%) rotate(0deg) scale(0.982, 1.018);
-  }
-  42.81% {
-    transform: translateY(0%) rotate(0deg) scale(1.008, 0.992);
-  }
-  48.97% {
-    transform: translateY(0%) rotate(0deg) scale(0.996, 1.004);
-  }
-  55.62% {
-    transform: translateY(0%) rotate(0deg) scale(1, 1);
-  }
-  100% {
-    transform: translateY(0%) rotate(0deg) scale(1, 1);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tap-drop {
-    animation: none;
-  }
 }
 
 .reply-note {
@@ -1848,10 +1627,10 @@ a.menu-item {
     0 0 0 calc(var(--focus-ring-width) + var(--border-width)) var(--color-accent-soft);
 }
 
-/* On an empty chat the question box follows the tagline in. */
+/* On an empty chat the question box rises in while the tagline is half written. */
 .main:has(.welcome) .composer {
   animation: rise-in var(--duration-reveal) var(--ease-standard) both;
-  animation-delay: calc(var(--tagline-words) * var(--duration-word-stagger));
+  animation-delay: calc(var(--duration-pen) / 2);
 }
 
 .composer-field {

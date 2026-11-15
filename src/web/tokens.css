@@ -71,6 +71,8 @@
 
   /* Typography */
   --font-reading: var(--font-sans-stack);
+  /* The wordmark's face only. */
+  --font-brand: 'Instrument Serif', Georgia, serif;
   --font-ui: var(--font-sans-stack);
   --font-code: var(--font-mono-stack);
 
@@ -80,6 +82,7 @@
   --text-lg: 1.0625rem;
   --text-xl: 1.375rem;
   --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
 
   --leading-tight: 1.25;
   --leading-snug: 1.4;
@@ -129,9 +132,6 @@
   --layout-measure: 34rem;
   --layout-card-min: 16rem;
   --composer-max-height: 12rem;
-  --layout-glow-width: 36rem;
-  --layout-glow-height: 16rem;
-  --layout-filling-drop: 6rem;
   --citation-size: 1.35em;
   --citation-raise: 0.15em;
   --code-size: 0.875em;
@@ -143,16 +143,11 @@
   --duration-fast: 120ms;
   --duration-base: 200ms;
   --duration-slow: 320ms;
-  --duration-succuss: 3200ms;
-  --duration-fill: 5200ms;
   --duration-stagger: 50ms;
   --duration-reveal: 480ms;
-  --duration-word-stagger: 60ms;
-  --duration-drift: 14s;
-  --duration-glow-in: 1600ms;
+  --duration-pen: 1300ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-exit: cubic-bezier(0.3, 0, 1, 1);
-  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
 
   /* Layers */
   --layer-sticky: 10;
@@ -186,8 +181,6 @@
   --color-accent-soft: light-dark(var(--herb-50), var(--herb-900));
   --color-accent-soft-hover: light-dark(var(--herb-100), var(--herb-800));
   --color-accent-border: light-dark(var(--herb-200), var(--herb-800));
-  --color-glow: light-dark(rgb(146 185 156 / 0.4), rgb(77 127 92 / 0.28));
-  --color-glow-warm: light-dark(rgb(224 192 122 / 0.25), rgb(138 101 20 / 0.18));
 
   --color-danger: light-dark(var(--rust-600), var(--rust-300));
   --color-danger-hover: light-dark(var(--rust-500), var(--rust-100));
@@ -220,7 +213,6 @@
     --duration-slow: 0ms;
     --duration-stagger: 0ms;
     --duration-reveal: 0ms;
-    --duration-word-stagger: 0ms;
-    --duration-glow-in: 0ms;
+    --duration-pen: 0ms;
   }
 }
