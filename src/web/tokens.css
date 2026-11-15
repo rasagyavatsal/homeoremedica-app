@@ -71,6 +71,8 @@
 
   /* Typography */
   --font-reading: var(--font-sans-stack);
+  /* The wordmark's face only. */
+  --font-brand: 'Instrument Serif', Georgia, serif;
   --font-ui: var(--font-sans-stack);
   --font-code: var(--font-mono-stack);
 
@@ -146,6 +148,8 @@
   --duration-reveal: 480ms;
   --duration-word-stagger: 60ms;
   --duration-drift: 14s;
+  --duration-pen: 1300ms;
+  --duration-underline: 600ms;
   --duration-glow-in: 1600ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-exit: cubic-bezier(0.3, 0, 1, 1);
