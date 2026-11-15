@@ -146,7 +146,6 @@
   --duration-slow: 320ms;
   --duration-stagger: 50ms;
   --duration-reveal: 480ms;
-  --duration-word-stagger: 60ms;
   --duration-drift: 14s;
   --duration-pen: 1300ms;
   --duration-glow-in: 1600ms;
@@ -219,7 +218,7 @@
     --duration-slow: 0ms;
     --duration-stagger: 0ms;
     --duration-reveal: 0ms;
-    --duration-word-stagger: 0ms;
+    --duration-pen: 0ms;
     --duration-glow-in: 0ms;
   }
 }

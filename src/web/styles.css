@@ -811,6 +811,8 @@ a.menu-item {
 }
 
 .tagline {
+  width: fit-content;
+  margin-inline: auto;
   font-family: var(--font-reading);
   font-size: var(--text-2xl);
   font-weight: var(--weight-medium);
@@ -820,14 +822,14 @@ a.menu-item {
   color: var(--color-text);
 }
 
-/* The words settle in one after another. */
-.tagline-word {
-  display: inline-block;
-  animation: rise-in var(--duration-reveal) var(--ease-standard) both;
-  animation-delay: calc(var(--word-index) * var(--duration-word-stagger));
+/* Written out left to right, as the name is; seen whole when motion is reduced. */
+@media (prefers-reduced-motion: no-preference) {
+  .tagline {
+    animation: pen-stroke var(--duration-pen) cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
 }
 
-/* Glows sit centred behind the tagline, fade in once its words have settled, then drift.
+/* Glows sit centred behind the tagline, fade in once it is written out, then drift.
    The box stays narrower than the column so drifting never spills into a scrollbar. */
 .welcome-glows {
   position: absolute;
@@ -839,7 +841,7 @@ a.menu-item {
   translate: -50% -50%;
   pointer-events: none;
   animation: fade-in var(--duration-glow-in) var(--ease-standard) both;
-  animation-delay: calc(var(--tagline-words) * var(--duration-word-stagger));
+  animation-delay: var(--duration-pen);
 }
 
 .welcome-glow {
@@ -1672,10 +1674,10 @@ a.menu-item {
     0 0 0 calc(var(--focus-ring-width) + var(--border-width)) var(--color-accent-soft);
 }
 
-/* On an empty chat the question box follows the tagline in. */
+/* On an empty chat the question box rises in while the tagline is half written. */
 .main:has(.welcome) .composer {
   animation: rise-in var(--duration-reveal) var(--ease-standard) both;
-  animation-delay: calc(var(--tagline-words) * var(--duration-word-stagger));
+  animation-delay: calc(var(--duration-pen) / 2);
 }
 
 .composer-field {

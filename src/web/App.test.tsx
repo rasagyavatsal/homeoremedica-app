@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import App from './App.tsx'
+import { greetingsAt } from './greetings.ts'
 import { NOTICE_KEY } from './PractitionerNotice.tsx'
 import { answerStream, citation, json, pending } from './test/fakes.ts'
 
@@ -274,10 +275,11 @@ describe('asking', () => {
     ])
   })
 
-  it('shows the tagline in an empty chat', () => {
+  it('greets an empty chat for the time of day', () => {
     render(<App />)
 
-    expect(screen.getByRole('heading', { level: 1, name: 'AI for homeopathy' })).toBeInTheDocument()
+    const hour = new Date().getHours()
+    expect(greetingsAt(hour)).toContain(screen.getByRole('heading', { level: 1 }).textContent)
   })
 
   it('shows a failure and asks again on request', async () => {
@@ -349,13 +351,13 @@ describe('saved chats', () => {
 
     const sidebar = screen.getByRole('navigation', { name: 'Chats' })
     await userEvent.click(within(sidebar).getByRole('button', { name: 'New chat' }))
-    expect(screen.getByRole('heading', { level: 1, name: 'AI for homeopathy' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
     await userEvent.click(within(sidebar).getByRole('button', { name: 'Pulsatilla keynotes?' }))
     expect(await screen.findByRole('heading', { name: 'Pulsatilla keynotes?' })).toBeInTheDocument()
 
     // The name starts a new chat too.
     await userEvent.click(within(sidebar).getByRole('button', { name: 'HomeoRemedica' }))
-    expect(screen.getByRole('heading', { level: 1, name: 'AI for homeopathy' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
   })
 
   it('deletes a chat after confirmation', async () => {
@@ -368,7 +370,7 @@ describe('saved chats', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Delete' }))
 
     expect(await screen.findByText('Your chats will appear here.')).toBeInTheDocument()
-    expect(screen.getByRole('heading', { level: 1, name: 'AI for homeopathy' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
     expect(localStorage.getItem('homeoremedica.library.v1')).toBe('[]')
   })
 
