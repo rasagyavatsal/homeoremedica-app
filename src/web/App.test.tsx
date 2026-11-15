@@ -353,7 +353,7 @@ describe('saved chats', () => {
     await userEvent.click(within(sidebar).getByRole('button', { name: 'Pulsatilla keynotes?' }))
     expect(await screen.findByRole('heading', { name: 'Pulsatilla keynotes?' })).toBeInTheDocument()
 
-    // The logo starts a new chat too.
+    // The name starts a new chat too.
     await userEvent.click(within(sidebar).getByRole('button', { name: 'HomeoRemedica' }))
     expect(screen.getByRole('heading', { level: 1, name: 'AI for homeopathy' })).toBeInTheDocument()
   })
