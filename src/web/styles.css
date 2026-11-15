@@ -811,21 +811,34 @@ a.menu-item {
 }
 
 .tagline {
-  width: fit-content;
-  margin-inline: auto;
-  font-family: var(--font-reading);
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-medium);
+  font-family: var(--font-brand);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-regular);
   line-height: var(--leading-tight);
   text-align: center;
   text-wrap: balance;
   color: var(--color-text);
 }
 
-/* Written out left to right, as the name is; seen whole when motion is reduced. */
+/* Written out as the name is, one line after another: the text is painted by a background that grows from the
+   left, and an inline box lays its lines end to end for it. Seen whole when motion is reduced. */
+.tagline-text {
+  background: linear-gradient(var(--color-text), var(--color-text)) no-repeat;
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .tagline {
-    animation: pen-stroke var(--duration-pen) cubic-bezier(0.65, 0, 0.35, 1) both;
+  .tagline-text {
+    animation: pen-ink var(--duration-pen) cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+}
+
+@keyframes pen-ink {
+  from {
+    background-size: 0% 100%;
   }
 }
 

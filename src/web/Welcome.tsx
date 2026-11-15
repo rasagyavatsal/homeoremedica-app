@@ -12,7 +12,9 @@ export function Welcome() {
         <span className="welcome-glow" />
         <span className="welcome-glow" />
       </div>
-      <h1 className="tagline">{line}</h1>
+      <h1 className="tagline">
+        <span className="tagline-text">{line}</span>
+      </h1>
     </div>
   )
 }
