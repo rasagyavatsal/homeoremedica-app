@@ -236,31 +236,14 @@ ul {
 }
 
 .brand-name-accent {
-  position: relative;
   color: var(--color-accent-text);
   font-style: italic;
 }
 
-/* A pen's line under Homeo. */
-.brand-name-accent::after {
-  position: absolute;
-  right: 0.05em;
-  bottom: -0.04em;
-  left: 0;
-  height: 1.5px;
-  background: currentColor;
-  content: '';
-  transform-origin: left;
-}
-
-/* Written out left to right as the page opens, then underlined; seen whole when motion is reduced. */
+/* Written out left to right as the page opens; seen whole when motion is reduced. */
 @media (prefers-reduced-motion: no-preference) {
   .brand-name {
     animation: pen-stroke var(--duration-pen) cubic-bezier(0.65, 0, 0.35, 1) both;
-  }
-
-  .brand-name-accent::after {
-    animation: underline var(--duration-underline) var(--ease-standard) calc(var(--duration-pen) - 200ms) both;
   }
 }
 
@@ -270,12 +253,6 @@ ul {
   }
   to {
     clip-path: inset(-20% 0 -20% 0);
-  }
-}
-
-@keyframes underline {
-  from {
-    transform: scaleX(0);
   }
 }
 
