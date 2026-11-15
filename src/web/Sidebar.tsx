@@ -1,7 +1,7 @@
 import { type ReactNode, useState } from 'react'
 
 import type { ChatSummary } from '../server/contracts.ts'
-import { CloseIcon, DropMark, PlusIcon, SearchIcon, TrashIcon } from './icons.tsx'
+import { CloseIcon, PlateMark, PlusIcon, SearchIcon, TrashIcon } from './icons.tsx'
 import { ThemeToggle } from './ThemeToggle.tsx'
 
 interface SidebarProps {
@@ -28,7 +28,7 @@ export function Sidebar({ chats, activeId, onNew, onOpen, onDelete, onClose, foo
       <div className="sidebar-header">
         {/* The logo starts a new chat, as in most chat apps. */}
         <button type="button" className="brand brand-button" onClick={onNew}>
-          <DropMark />
+          <PlateMark />
           <span className="brand-name">
             <span className="brand-name-accent">Homeo</span>Remedica
           </span>
