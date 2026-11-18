@@ -38,8 +38,13 @@ export function errorMessage(error: unknown): string {
   return FALLBACK_DETAIL
 }
 
+/** The address of an API path: on the API's origin when the build names one, else on this page's. */
+export function apiUrl(path: string): string {
+  return (import.meta.env.VITE_API_ORIGIN ?? '') + path
+}
+
 export async function getJson<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(path, init)
+  const response = await fetch(apiUrl(path), init)
   if (!response.ok) throw await failure(response)
   return (await response.json()) as T
 }
@@ -91,7 +96,7 @@ export async function streamChat(
   { onSources, onText }: StreamHandlers = {},
   signal?: AbortSignal,
 ): Promise<WebChatResponse> {
-  const response = await fetch('/api/chat', {
+  const response = await fetch(apiUrl('/api/chat'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
     body: JSON.stringify(question),

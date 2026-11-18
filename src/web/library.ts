@@ -11,7 +11,7 @@ import type {
   SavedConversation,
   SavedMessage,
 } from '../server/contracts.ts'
-import { ApiError, ShownError, failure } from './api.ts'
+import { ApiError, ShownError, apiUrl, failure } from './api.ts'
 import { type Conversation, savedMessages, titleFrom } from './conversation.ts'
 
 export interface ChatLibrary {
@@ -116,7 +116,7 @@ export class AccountLibrary implements ChatLibrary {
   async #request(path: string, init: RequestInit = {}): Promise<Response> {
     const headers = new Headers(init.headers)
     headers.set('Authorization', `Bearer ${await this.#token()}`)
-    const response = await fetch(path, { ...init, headers })
+    const response = await fetch(apiUrl(path), { ...init, headers })
     if (!response.ok) throw await failure(response)
     return response
   }
