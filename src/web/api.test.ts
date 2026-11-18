@@ -1,6 +1,6 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { ApiError, errorMessage, readEvents, streamChat } from './api.ts'
+import { ApiError, apiUrl, errorMessage, readEvents, streamChat } from './api.ts'
 import { chatResponse, citation, eventStream, json, sse } from './test/fakes.ts'
 
 async function collect(chunks: string[]) {
@@ -8,6 +8,20 @@ async function collect(chunks: string[]) {
   for await (const event of readEvents(eventStream(chunks))) events.push(event)
   return events
 }
+
+describe('apiUrl', () => {
+  afterEach(() => vi.unstubAllEnvs())
+
+  it('calls the API on this page’s origin when the build names none', () => {
+    expect(apiUrl('/api/chat')).toBe('/api/chat')
+  })
+
+  it('calls the API on the origin the build names', () => {
+    vi.stubEnv('VITE_API_ORIGIN', 'https://api.example')
+
+    expect(apiUrl('/api/chat')).toBe('https://api.example/api/chat')
+  })
+})
 
 describe('readEvents', () => {
   it('parses events split across chunks and line endings', async () => {
