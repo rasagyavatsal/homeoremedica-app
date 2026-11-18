@@ -1,6 +1,6 @@
 {
   "projects": {
     "prod": "homeoremedica",
-    "dev": "homeoremedica-dev"
+    "dev": "homeoremedica-dev-1"
   }
 }
