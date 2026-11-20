@@ -11,8 +11,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
     "build": "vite build",
-    "start": "node src/server/server.ts",
-    "typecheck": "tsc -p tsconfig.server.json && tsc -p tsconfig.web.json && tsc -p tsconfig.e2e.json",
+    "typecheck": "tsc -p tsconfig.web.json && tsc -p tsconfig.e2e.json",
     "test": "vitest run",
     "e2e": "playwright test",
     "e2e:smoke": "playwright test --config playwright.smoke.config.ts",
@@ -22,10 +21,7 @@
   },
   "dependencies": {
     "@fontsource/instrument-serif": "5.3.0",
-    "@hono/node-server": "2.1.5",
     "firebase": "13.0.0",
-    "firebase-admin": "14.5.0",
-    "hono": "4.13.13",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-markdown": "10.1.0",
