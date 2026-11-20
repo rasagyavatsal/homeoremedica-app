@@ -6,7 +6,7 @@
   "packages": {
     ".": {
       "release-type": "node",
-      "package-name": "homeoremedica-app"
+      "package-name": "homeoremedica-web"
     }
   }
 }

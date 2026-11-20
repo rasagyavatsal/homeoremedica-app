@@ -1,6 +1,6 @@
 name: Deploy
 
-# Deploys the API to Cloud Run, then the web app to Firebase Hosting, in one project.
+# Deploys the web app to Firebase Hosting, calling the API at `api_origin`.
 # Release Please calls it for prod, Deploy dev for dev. Run it by hand to redeploy prod.
 on:
   workflow_call:
@@ -42,12 +42,26 @@ jobs:
     concurrency:
       group: deploy-${{ inputs.project }}
       cancel-in-progress: false
+    # The e2e tests and the contracts check read a sibling homeoremedica-server checkout.
+    defaults:
+      run:
+        working-directory: homeoremedica-web
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: homeoremedica-web
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: rasagyavatsal/homeoremedica-server
+          ref: ${{ github.ref_name }}
+          path: homeoremedica-server
+      - name: Check the API contracts match homeoremedica-server's
+        run: diff -u ../homeoremedica-server/src/contracts.ts src/web/contracts.ts
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
           cache: npm
+          cache-dependency-path: homeoremedica-web/package-lock.json
       - run: npm ci
       - run: npm run check
       - run: npm run build
@@ -57,10 +71,6 @@ jobs:
         with:
           workload_identity_provider: ${{ inputs.workload_identity_provider }}
           service_account: ${{ inputs.service_account }}
-      - uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3.0.1
-      - run: npm run deploy -- --quiet
-        env:
-          GCP_PROJECT: ${{ inputs.project }}
-      - run: npx --yes firebase-tools@15.32.1 deploy --only hosting --project "$GCP_PROJECT" --non-interactive
+      - run: npm run deploy
         env:
           GCP_PROJECT: ${{ inputs.project }}

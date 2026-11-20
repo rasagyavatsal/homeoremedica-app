@@ -1,8 +1,8 @@
 {
-  "name": "homeoremedica",
+  "name": "homeoremedica-web",
   "private": true,
   "version": "10.7.0",
-  "description": "HomeoRemedica web chat app",
+  "description": "HomeoRemedica web app",
   "license": "MIT",
   "type": "module",
   "engines": {
@@ -17,7 +17,7 @@
     "e2e:smoke": "playwright test --config playwright.smoke.config.ts",
     "check": "npm run typecheck && npm test && npm run build",
     "contracts": "cp ../homeoremedica-server/src/contracts.ts src/web/contracts.ts",
-    "deploy": "gcloud run deploy homeoremedica --source . --region asia-south1 --project ${GCP_PROJECT:-homeoremedica} --max-instances 1"
+    "deploy": "npx --yes firebase-tools@15.32.1 deploy --only hosting --project ${GCP_PROJECT:-homeoremedica} --non-interactive"
   },
   "dependencies": {
     "@fontsource/instrument-serif": "5.3.0",
