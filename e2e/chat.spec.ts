@@ -11,7 +11,9 @@ test('streams an answer and opens a cited passage', async ({ page }) => {
   const reply = replies(page).last()
   await expect(reply).toContainText('Kent describes the irritability of Nux vomica')
   // Only the cited passages are listed.
-  await expect(reply.getByRole('list', { name: 'References' }).getByRole('listitem')).toHaveText([/NUX VOMICA/, /BRYONIA/])
+  await reply.getByRole('button', { name: '2 references' }).click()
+  await expect(page.getByRole('region', { name: 'References' }).getByRole('listitem')).toHaveText([/NUX VOMICA/, /BRYONIA/])
+  await page.getByRole('button', { name: 'Close references' }).click()
 
   await reply.getByRole('button', { name: 'Source 1' }).click()
   const panel = page.getByRole('region', { name: 'NUX VOMICA' })
