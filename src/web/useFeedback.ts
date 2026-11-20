@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import type { AnswerRatings, Feedback, FeedbackReason, Rating } from '../server/contracts.ts'
+import type { AnswerRatings, Feedback, FeedbackReason, Rating } from './contracts.ts'
 import { errorMessage } from './api.ts'
 import { type Conversation, type Message, citedSources } from './conversation.ts'
 

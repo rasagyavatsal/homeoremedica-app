@@ -1,6 +1,6 @@
 import type { Components } from 'react-markdown'
 
-import type { Citation, Rating } from '../server/contracts.ts'
+import type { Citation, Rating } from './contracts.ts'
 import { ArrowLeftIcon, CloseIcon } from './icons.tsx'
 import { Markdown } from './Markdown.tsx'
 import { RatingButtons } from './Rating.tsx'

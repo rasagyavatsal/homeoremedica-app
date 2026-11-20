@@ -1,6 +1,6 @@
 import { type CSSProperties, useState } from 'react'
 
-import type { Rating } from '../server/contracts.ts'
+import type { Rating } from './contracts.ts'
 import { ThumbDownIcon, ThumbUpIcon } from './icons.tsx'
 
 const SPARKS = 6

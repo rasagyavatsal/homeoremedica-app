@@ -1,6 +1,6 @@
 import { type CSSProperties, type FormEvent, type KeyboardEvent, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-import type { AnswerRatings, FeedbackReason, Rating } from '../server/contracts.ts'
+import type { AnswerRatings, FeedbackReason, Rating } from './contracts.ts'
 import { ArrowUpIcon, CheckIcon } from './icons.tsx'
 import { RatingButtons } from './Rating.tsx'
 import type { AnswerNote } from './useFeedback.ts'

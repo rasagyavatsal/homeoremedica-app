@@ -1,6 +1,6 @@
 /** Browser client for the HomeoRemedica API. */
 
-import type { ChatTurn, Citation, DiseasesResponse, KindResponse, QuestionKind, SymptomsResponse, WebChatResponse } from '../server/contracts.ts'
+import type { ChatTurn, Citation, DiseasesResponse, KindResponse, QuestionKind, SymptomsResponse, WebChatResponse } from './contracts.ts'
 
 const FALLBACK_DETAIL = 'Something went wrong. Please try again.'
 const INTERRUPTED_DETAIL = 'The answer stopped before it finished. Please try again.'

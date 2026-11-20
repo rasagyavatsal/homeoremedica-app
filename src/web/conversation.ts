@@ -1,6 +1,6 @@
 /** A chat as the browser holds it, and the helpers that read it. */
 
-import type { ChatTurn, Citation, SavedMessage } from '../server/contracts.ts'
+import type { ChatTurn, Citation, SavedMessage } from './contracts.ts'
 
 const MAX_TITLE_CHARS = 80
 export interface Message {
