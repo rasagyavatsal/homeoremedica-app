@@ -1,4 +1,4 @@
-import type { ChatTurn, Citation, WebChatResponse } from '../../server/contracts.ts'
+import type { ChatTurn, Citation, WebChatResponse } from '../contracts.ts'
 
 export function citation(number: number, overrides: Partial<Citation> = {}): Citation {
   return {

@@ -1,6 +1,6 @@
 import { type ReactNode, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
-import type { ChatSummary, ClientConfig } from '../server/contracts.ts'
+import type { ChatSummary, ClientConfig } from './contracts.ts'
 import { AccountControls } from './AccountControls.tsx'
 import { errorMessage, getJson } from './api.ts'
 import { type Account, type AuthClient, authErrorMessage, connectAuth } from './auth.ts'

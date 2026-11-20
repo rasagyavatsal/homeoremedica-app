@@ -1,7 +1,7 @@
 import { memo, useCallback, useId, useLayoutEffect, useRef, useState } from 'react'
 
 import { Answer } from './Answer.tsx'
-import type { AnswerRatings } from '../server/contracts.ts'
+import type { AnswerRatings } from './contracts.ts'
 import { type Message, listedSources } from './conversation.ts'
 import { AlertIcon, ChevronDownIcon, ChevronRightIcon, RetryIcon } from './icons.tsx'
 import { AnswerFeedback } from './AnswerFeedback.tsx'

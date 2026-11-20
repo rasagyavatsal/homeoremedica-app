@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { beforeEach, expect, it, vi } from 'vitest'
 
 import { version } from '../../package.json'
-import type { AnswerRatings, Feedback, SavedChat } from '../server/contracts.ts'
+import type { AnswerRatings, Feedback, SavedChat } from './contracts.ts'
 import App from './App.tsx'
 import type { Account, AuthClient } from './auth.ts'
 import { NOTICE_KEY } from './PractitionerNotice.tsx'

@@ -1,6 +1,6 @@
 import { type ReactNode, useState } from 'react'
 
-import type { ChatSummary } from '../server/contracts.ts'
+import type { ChatSummary } from './contracts.ts'
 import { CloseIcon, PlusIcon, SearchIcon, TrashIcon } from './icons.tsx'
 import { ThemeToggle } from './ThemeToggle.tsx'
 

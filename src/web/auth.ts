@@ -1,6 +1,6 @@
 /** Sign-in through Firebase Authentication, loaded only when the server has accounts. */
 
-import type { AuthConfig } from '../server/contracts.ts'
+import type { AuthConfig } from './contracts.ts'
 import { ShownError } from './api.ts'
 
 export interface Account {

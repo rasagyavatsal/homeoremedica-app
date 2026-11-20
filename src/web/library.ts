@@ -10,7 +10,7 @@ import type {
   SavedChat,
   SavedConversation,
   SavedMessage,
-} from '../server/contracts.ts'
+} from './contracts.ts'
 import { ApiError, ShownError, apiUrl, failure } from './api.ts'
 import { type Conversation, savedMessages, titleFrom } from './conversation.ts'
 

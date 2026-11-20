@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto'
 import { type APIRequestContext, type Page, expect } from '@playwright/test'
 
 import { ask, chatsLoaded } from './fixtures.ts'
-import { API_KEY, AUTH_EMULATOR, PROJECT_ID } from './scenario.ts'
+import { API_KEY, AUTH_EMULATOR, PROJECT_ID } from '../../homeoremedica-server/e2e/scenario.ts'
 
 const EMULATOR = `http://${AUTH_EMULATOR}`
 // The emulator takes this as an administrator's credential.
