@@ -1,5 +1,5 @@
 import { ask, expect, openApp, replies, test, unique } from './fixtures.ts'
-import { CHAT_LIMIT, FAIL_ONCE, SLOW, SUMMARY_PREFIX } from './scenario.ts'
+import { CHAT_LIMIT, FAIL_ONCE, SLOW, SUMMARY_PREFIX } from '../../homeoremedica-server/e2e/scenario.ts'
 
 test.beforeEach(async ({ page }) => {
   await openApp(page)
